@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111411">
+  <title>Coding EL-Fardy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Coding EL-Fardy">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span>Coding <b>EL-Fardy</b></span>
+      </a>
+      <div class="project-heading">
+        <i class="project-dot"></i>
+        <span>مشروعي الأول</span>
+        <span class="save-status" id="save-status">تم الحفظ</span>
+      </div>
+      <div class="top-actions">
+        <button class="button button-quiet" id="new-project-button" type="button">مشروع جديد</button>
+        <button class="button button-quiet" id="open-file-button" type="button">فتح ملف</button>
+        <input id="file-picker" type="file" accept=".html,.htm,.css,.js,text/html,text/css,text/javascript" hidden>
+        <button class="button button-quiet" id="open-folder-button" type="button">فتح مجلد</button>
+        <input id="folder-picker" type="file" webkitdirectory directory multiple hidden>
+        <button class="button button-run" id="run-button" type="button"><span>▶</span> تشغيل</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar" aria-label="ملفات المشروع">
+        <div class="side-heading">
+          <span>ملفات المشروع</span>
+          <button id="add-file-button" class="icon-button" type="button" title="ملف جديد">+</button>
+        </div>
+        <div class="project-root"><span class="chevron">⌄</span><span class="folder-icon">▰</span><span>مشروعي الأول</span></div>
+        <nav class="file-list" aria-label="ملفات الكود">
+          <button class="file-row active" data-file="html" type="button"><span class="file-icon html-icon">5</span><span>index.html</span></button>
+          <button class="file-row" data-file="css" type="button"><span class="file-icon css-icon">3</span><span>style.css</span></button>
+          <button class="file-row" data-file="js" type="button"><span class="file-icon js-icon">JS</span><span>script.js</span></button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="tip-label"><span>✳</span> مساحة إبداعك</div>
+          <p>اكتب كودك وشوف النتيجة فورًا في العرض.</p>
+          <div class="storage-note"><i></i> محفوظ على جهازك</div>
+        </div>
+      </aside>
+
+      <section class="editor-panel" aria-label="محرر الأكواد">
+        <div class="editor-topline">
+          <div class="editor-tabs" role="tablist" aria-label="لغة البرمجة">
+            <button class="editor-tab selected" data-tab="html" role="tab" aria-selected="true" type="button"><span class="file-icon html-icon">5</span> HTML</button>
+            <button class="editor-tab" data-tab="css" role="tab" aria-selected="false" type="button"><span class="file-icon css-icon">3</span> CSS</button>
+            <button class="editor-tab" data-tab="js" role="tab" aria-selected="false" type="button"><span class="file-icon js-icon">JS</span> JavaScript</button>
+          </div>
+          <div class="editor-tools">
+            <span class="language-label" id="language-label">HTML</span>
+            <button class="icon-button" id="clear-button" type="button" title="مسح محتوى الملف">⌫</button>
+          </div>
+        </div>
+        <div class="editor-surface"><div id="code-editor" role="textbox" aria-label="محرر الأكواد" dir="ltr"></div></div>
+        <footer class="editor-statusbar">
+          <span><i></i> جاهز</span>
+          <span id="cursor-position">سطر 1، عمود 1</span>
+          <span>UTF-8</span>
+        </footer>
+      </section>
+
+      <section class="preview-panel" aria-label="معاينة الموقع">
+        <div class="preview-toolbar">
+          <div class="preview-title"><i></i><strong>العرض</strong><span>معاينة مباشرة</span></div>
+          <div class="preview-actions">
+            <div class="device-switch" role="group" aria-label="حجم المعاينة">
+              <button class="device-button selected" data-device="desktop" type="button" title="سطح المكتب" aria-label="عرض سطح المكتب">▰</button>
+              <button class="device-button" data-device="tablet" type="button" title="جهاز لوحي" aria-label="عرض الجهاز اللوحي">▤</button>
+              <button class="device-button" data-device="mobile" type="button" title="هاتف" aria-label="عرض الهاتف">▯</button>
+            </div>
+            <button class="icon-button refresh-button" id="refresh-button" type="button" title="تحديث العرض">↻</button>
+          </div>
+        </div>
+        <div class="preview-stage">
+          <div class="browser-frame" id="browser-frame">
+            <div class="browser-chrome">
+              <div class="window-dots"><i></i><i></i><i></i></div>
+              <div class="address-bar">⌑ معاينة محلية</div>
+              <span class="browser-menu">•••</span>
+            </div>
+            <iframe id="preview-frame" title="نتيجة الكود" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+          </div>
+        </div>
+        <div class="console-panel">
+          <button class="console-heading" id="console-toggle" type="button" aria-expanded="true">
+            <span class="chevron">⌄</span><span>وحدة التحكم</span>
+            <span class="console-count" id="console-count">0</span>
+            <span class="console-clear" id="console-clear">مسح</span>
+          </button>
+          <div class="console-output" id="console-output"><div class="console-empty">رسائل وأخطاء الكود هتظهر هنا.</div></div>
+        </div>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/ace.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/ext-language_tools.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/mode-html.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/mode-css.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/mode-javascript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/theme-tomorrow_night.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
